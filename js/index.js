@@ -33,14 +33,10 @@ window.addEventListener('load', async ()=>{
 })
 
 login.onclick = function(){
-    register.classList.remove('active');
-    login.classList.add('active');
-    h2type.textContent = 'Login';
-    formLogin.style.display = '';
-    formRegister.style.display = 'none';
+    client.clickLogin();
 }
 register.onclick = function(){
-    
+    client.clickRegister();
 }
 btnLogin.onclick = ()=>{
     overlay.style.display = 'flex';
