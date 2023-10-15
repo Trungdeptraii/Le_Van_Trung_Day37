@@ -2,6 +2,7 @@ import * as client from './fetch.js';
 let user;
 const tag = (tag)=>document.querySelector(tag);
 const overlay = tag('.overlay');
+const blog = tag('.blog')
 const btn = tag('.btn');
 const userEl = tag('.user');
 const userName = tag('.user-name');
@@ -114,6 +115,7 @@ postForm.addEventListener('submit',async (e)=>{
     const content = tag('.posts-content').value;
     let {res, data} = await client.Fetch('POST', 'blogs', {title, content}, token.accessToken)
     if(res.ok){
+        blog.textContent = '';
         console.log(data)
         data = data.reverse();
         console.log(data)
