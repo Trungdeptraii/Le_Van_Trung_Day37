@@ -1,5 +1,5 @@
 import * as client from './fetch.js';
-let user;
+let user, blogs;
 const tag = (tag)=>document.querySelector(tag);
 const overlay = tag('.overlay');
 const blog = tag('.blog')
@@ -21,14 +21,18 @@ const notiLogin = tag('.noti-login');
 const notiRegister = tag('.noti-register');
 const post = tag('.post');
 const postForm = tag('.posts');
+const loading = tag('.loading');
 
 window.addEventListener('load', async ()=>{
+    loading.classList.add('active');
     let {res, data} = await client.Fetch('GET', 'blogs');
     if(res.ok){
+        blogs = data;
         console.log(data)
-        let dataReverse = data.reverse();
-        console.log(dataReverse)
-        dataReverse.forEach(el=>client.renderBlog(el))
+        loading.classList.remove('active');
+        data.forEach(el=>client.renderBlog(el))
+    }else{
+        loading.classList.remove('active');
     }
 })
 
@@ -54,6 +58,7 @@ btnExitRegister.onclick = ()=>{
 }
 formLogin.addEventListener('submit',async (e)=>{
     e.preventDefault();
+    loading.classList.add('active');
     const email = tag('.login-email').value;
     const password = tag('.login-password').value;
     console.log(email, password)
@@ -67,10 +72,12 @@ formLogin.addEventListener('submit',async (e)=>{
             userEl.style.display = 'flex';
             btn.style.display = 'none';
             userAvt.textContent = name.charAt(0).toUpperCase();
-            userName.textContent = name
+            userName.textContent = name;
+            loading.classList.remove('active');
 
         }else{
-            notiLogin.textContent = data
+            notiLogin.textContent = data;
+            loading.classList.remove('active');
         }
     }
 })
@@ -90,6 +97,7 @@ formRegister.addEventListener('submit',async (e)=>{
     }
 })
 logout.onclick = async ()=>{
+    loading.classList.add('active');
     let token = client.fnToken();
     const {res} = await client.Fetch('POST','logout', {}, token.accessToken );
     if(res.ok){
@@ -97,9 +105,12 @@ logout.onclick = async ()=>{
         userEl.style.display = 'none';
         btn.style.display = 'flex';
         user = undefined;
+        loading.classList.remove('active');
     }else{
-        console.log(res)
+        console.log(res);
+        loading.classList.remove('active');
     }
+    post.style.display = 'none';
 }
 create.onclick = ()=>{
     post.style.display = 'block';
@@ -112,11 +123,15 @@ postForm.addEventListener('submit',async (e)=>{
     let {res, data} = await client.Fetch('POST', 'blogs', {title, content}, token.accessToken)
     if(res.ok){
         blog.textContent = '';
-        console.log(data)
-        data = data.reverse();
-        console.log(data)
-        data.forEach(el=>client.renderBlog(el))
-    }else{
-        console.log(res)
-    }
+        let {res, data} = await client.Fetch('GET', 'blogs');
+        if(res.ok){
+            blogs = data;
+            loading.classList.remove('active');
+            data.forEach(el=>client.renderBlog(el))
+        }else{
+            loading.classList.remove('active');
+        }
+        }else{
+            console.log(res)
+        }
 })

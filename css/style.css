@@ -23,6 +23,7 @@ body{
     margin: 30px 30px 30px auto;
 }
 .btn-login, .btn-register{
+    cursor: pointer;
     color: white;
     flex-grow: 1;
     border-radius: 99px;
@@ -101,9 +102,11 @@ body{
 }
 .login{
     background-color: burlywood;
+    cursor: pointer;
 }
 .register{
     background-color: cadetblue;
+    cursor: pointer;
 }
 .login.active, .register.active{
     background-color: greenyellow;
@@ -210,4 +213,61 @@ h2{
 }
 .create-blog{
     height: 30px;
+}
+
+/* Loading */
+.loading{
+    display: none;
+}
+.loading.active{
+    display: flex;
+    position: fixed;
+    inset: 0;
+    background-color: rgb(214, 207, 221, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.loading-animate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 50px;
+    gap: 10px;
+}
+.animate{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.loading-animate .animate span{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid grey;
+    position: relative;
+    animation: animate 0.5s linear infinite;
+}
+.animate span:nth-child(1){
+    animation-delay: 0.1s;
+}
+.animate span:nth-child(2){
+    animation-delay: 0.2s;
+}
+.animate span:nth-child(3){
+    animation-delay: 0.3s;
+}
+.animate span:nth-child(4){
+    animation-delay: 0.4s;
+}
+@keyframes animate{
+    from{
+        top: -10px;
+        background-color: rgb(6, 238, 103);
+    }
+    to{
+        top: 0px
+    }
 }

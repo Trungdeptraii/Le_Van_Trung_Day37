@@ -48,7 +48,7 @@ export const renderBlog = (data)=>{
     const blogAvt = document.createElement('div');;
     blogAvt.className = 'blog-avt';
     let arrName = data.userId.name.split(' ');
-    blogAvt.textContent = arrName[arrName.length-1].charAt(0);
+    blogAvt.textContent = arrName[arrName.length-1].charAt(0).toUpperCase();
     blogHeader.append(blogAvt);
 
     const blogName = document.createElement('div');;
@@ -68,6 +68,11 @@ export const renderBlog = (data)=>{
 
     const blogContent = document.createElement('div');;
     blogContent.className = 'blog-content';
+    blogContent.textContent = data.content;
+    blogBody.append(blogContent);
+
+    const blogTagId = document.createElement('div');;
+    blogContent.className = 'blog-tagId';
     blogContent.textContent = data.content;
     blogBody.append(blogContent);
 
