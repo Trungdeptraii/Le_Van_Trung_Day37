@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="auth">
+        <div class="user">
+            <span class="use-profile">
+                <span class="user-avt"></span>
+                <span class="user-name"></span>           
+            </span>
+            <span class="create-post"><a href="#">Create</a></span>
+            <span class="logout"><a href="#">Logout</a></span>
+        </div>
+        <div class="btn">
+            <div class="btn-login">Login</div>
+            <div class="btn-register">Register</div>
+        </div>
+    </div>
+    <div class="post">
+        <h2>Tạo blog</h2>
+        <form action="" class="posts">
+            <input type="text" placeholder="Nhập tiêu đề" class="posts-title">
+            <textarea name="" id="" cols="30" rows="10" placeholder="Nhập nội dung" class="posts-content"></textarea>
+            <button class="create-blog">create</button>
+        </form>
+    </div>
+    <div class="blog">
+    </div>
+    <div class="overlay">
+        <div class="form">
+            <div class="type-form">
+                <div class="login active">Login</div>
+                <div class="register">Register</div>
+            </div>
+            <h2 class="type">Login</h2>
+            <div class="form-body">
+                <form action="#" class="form-login">
+                    <div class="form-login-body">
+                        <div class="field">
+                            <input type="email" class="login-email" required placeholder="Nhập email" value="trung@gmail.com">
+                        </div>
+                        <div class="field">
+                            <input type="text" class="login-password" required placeholder="Nhập password" value="trung12345">
+                        </div>
+                        <div class="field">
+                            <button class="btn-login-form" type="submit">Login</button>
+                            <button class="btn-exit-login" type="button">Thoát</button>
+                        </div>
+                        <div class="field noti-login"></div>
+                    </div>
+                </form>
+                <form action="#" class="form-register">
+                    <div class="form-login-body">
+                        <div class="field">
+                            <input type="text" class="register-name" required placeholder="Nhập tên">
+                        </div>
+                        <div class="field">
+                            <input type="email" required class="register-email" placeholder="Nhập email">
+                        </div>
+                        <div class="field">
+                            <input type="text" required class="register-password" placeholder="Nhập password">
+                        </div>
+                        <div class="field">
+                            <button class="btn-register-form" type="submit">Register</button>
+                            <button class="btn-exit-register" type="button">Thoát</button>
+                        </div>
+                        <div class="field noti-register"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+ <script type="module" src="./js/index.js"></script>
+</html>
