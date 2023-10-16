@@ -1,10 +1,13 @@
 const tag = (tag)=>document.querySelector(tag);
 const blog = tag('.blog')
-const h2type = tag('h2');
+const h2type = tag('.type');
 const login = tag('.login');
 const register = tag('.register');
 const formLogin = tag('.form-login');
 const formRegister = tag('.form-register');
+const toast = tag('.toast');
+const toastBody = tag('.toast-body');
+const loading = tag('.loading');
 
 let apiServer = 'https://api-auth-two.vercel.app'
 export async function Fetch(method, source, data={}, token) {
@@ -19,7 +22,7 @@ export async function Fetch(method, source, data={}, token) {
         method: method,
         headers: myHeaders,
         body: method === "POST" ? raw : null,
-        redirect: "follow",
+        redirect: "follow"
     };
     try {
         const res = await fetch(
@@ -30,10 +33,19 @@ export async function Fetch(method, source, data={}, token) {
         if(res.ok){
             return {res, data: data.data}
         }else{
+            toast.classList.add('active');
+            toastBody.textContent = data.message;
+            console.log(data.message)
+            setTimeout(()=>{
+                toast.classList.remove('active');
+            }, 2000)
             return {res, data: data.message}
         }
     } catch (error) {
         console.log(error);
+        if(loading.classList.contains('active')){
+            loading.classList.remove('active');
+        }
         return false;
     }
 }

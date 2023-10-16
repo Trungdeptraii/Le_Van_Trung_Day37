@@ -271,3 +271,36 @@ h2{
         top: 0px
     }
 }
+.toast{
+    /* display: none; */
+    background-color: white;
+    width: 250px;
+    height: 80px;
+    position: fixed;
+    top: -80px;
+    left: calc(50% - 125px);
+    z-index: 3;
+    transition: top ease 0.5s;
+}
+@keyframes topmove {
+    from{
+        top: -80px
+    }
+}
+.toast.active{
+    display: block;
+    top: 20px;
+}
+.toast-content{
+    width: 100%;
+    height: 100%;
+    padding: 10px 10px;
+}
+.toast-header{
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.toast-body{
+    text-align: center;
+}

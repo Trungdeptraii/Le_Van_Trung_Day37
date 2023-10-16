@@ -17,11 +17,12 @@ const btnExitRegister = tag('.btn-exit-register');
 const create = tag('.create-post');
 const formLogin = tag('.form-login');
 const formRegister = tag('.form-register');
-const notiLogin = tag('.noti-login');
-const notiRegister = tag('.noti-register');
 const post = tag('.post');
 const postForm = tag('.posts');
 const loading = tag('.loading');
+const toastBody = tag('.toast-body');
+const toast = tag('.toast');
+
 
 window.addEventListener('load', async ()=>{
     loading.classList.add('active');
@@ -61,7 +62,6 @@ formLogin.addEventListener('submit',async (e)=>{
     loading.classList.add('active');
     const email = tag('.login-email').value;
     const password = tag('.login-password').value;
-    console.log(email, password)
     if(email && password){
         const {res, data} = await client.Fetch('POST', 'auth/login', {email, password});
         if(res.ok){
@@ -76,7 +76,6 @@ formLogin.addEventListener('submit',async (e)=>{
             loading.classList.remove('active');
 
         }else{
-            notiLogin.textContent = data;
             loading.classList.remove('active');
         }
     }
@@ -88,11 +87,19 @@ formRegister.addEventListener('submit',async (e)=>{
     const name = tag('.register-name').value;
     const password = tag('.register-password').value;
     if(email && password && name){
+        loading.classList.add('active');
         const {res, data} = await client.Fetch('POST', 'auth/register', {email, password, name});
         if(res.ok){
-            console.log(data)
+            toastBody.textContent = 'Tạo tài khoản thành công'
+            toast.classList.add('active');
+            client.clickLogin();
+            setTimeout(()=>{
+                toast.classList.remove('active');
+            }, 1500);
+            loading.classList.remove('active');
         }else{
-            notiRegister.textContent = data
+            console.log(res)
+            
         }
     }
 })
