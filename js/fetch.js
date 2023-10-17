@@ -128,12 +128,27 @@ export function fnToken(){
 }
 function createTime(blog){
     const timeNow = new Date();
-    const hoursNow = timeNow.getHours();
     const dayNow = timeNow.getDay();
+    const hoursNow = timeNow.getHours();
+    const minuteNow = timeNow.getMinutes();
+    const secondsNow = timeNow.getSeconds();
     const dayBlog = blog.getDay();
     const hourseBlog = blog.getHours();
     const minuteBlog = blog.getMinutes();
-    let time = hoursNow > hourseBlog &&  dayNow == dayBlog ? ` Khoảng ${hoursNow - hourseBlog} giờ trước ` : hoursNow < hourseBlog &&  dayNow > dayBlog ? ` Khoảng ${dayNow - dayBlog} ngày trước ` : ''
+    const secondsBlog = blog.getSeconds();
+    let time;
+    if(dayNow == dayBlog){
+        if(hoursNow > hourseBlog){
+            time = ` Khoảng ${hoursNow - hourseBlog} giờ trước `;
+        }else if(hoursNow == hourseBlog){
+            time = ` Khoảng ${minuteNow - minuteBlog} phút trước `;
+        }else if(hoursNow == hourseBlog && minuteNow == minuteBlog){
+            time = ` Khoảng ${secondsNow - secondsBlog} giây trước `;
+        }
+    }else if(dayNow > dayBlog){
+        time = ` Khoảng ${dayNow - dayBlog} ngày trước `;
+    }
+    time = hoursNow > hourseBlog &&  dayNow == dayBlog ? ` Khoảng ${hoursNow - hourseBlog} giờ trước ` :   dayNow > dayBlog ? ` Khoảng ${dayNow - dayBlog} ngày trước ` : ''
     return({
         timeNumber: `${hourseBlog} giờ - ${minuteBlog} phút`,
         timeLetter: time
