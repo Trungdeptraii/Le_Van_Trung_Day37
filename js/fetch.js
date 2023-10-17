@@ -51,6 +51,7 @@ export async function Fetch(method, source, data={}, token) {
 }
 
 export const renderBlog = (data)=>{
+    const timeRes = createTime(new Date(data.createdAt))
     const blogItem = document.createElement('div');
     blogItem.className= 'blog-item';
 
@@ -83,10 +84,20 @@ export const renderBlog = (data)=>{
     blogContent.textContent = data.content;
     blogBody.append(blogContent);
 
-    const blogTagId = document.createElement('div');;
-    blogContent.className = 'blog-tagId';
-    blogContent.textContent = data.content;
-    blogBody.append(blogContent);
+    const blogTime = document.createElement('div');
+    blogTime.className = 'blog-date-time';
+
+    const spanTimeNumber = document.createElement('span');
+    spanTimeNumber.className = 'time-number';
+    spanTimeNumber.textContent = timeRes.timeNumber;
+    blogTime.append(spanTimeNumber);
+
+    const spanTimeLetter = document.createElement('span');
+    spanTimeLetter.className = 'time-letter'
+    spanTimeLetter.textContent = timeRes.timeLetter;
+    blogTime.append(spanTimeLetter);
+
+    blogBody.append(blogTime);
 
     blogItem.append(blogBody)
 
@@ -114,5 +125,18 @@ export function fnToken(){
         accessToken: tokens.accessToken,
         refreshToken: tokens.refreshToken
     }
+}
+function createTime(blog){
+    const timeNow = new Date();
+    const hoursNow = timeNow.getHours();
+    const dayNow = timeNow.getDay();
+    const dayBlog = blog.getDay();
+    const hourseBlog = blog.getHours();
+    const minuteBlog = blog.getMinutes();
+    let time = hoursNow > hourseBlog &&  dayNow == dayBlog ? ` Khoảng ${hoursNow - hourseBlog} giờ trước ` : hoursNow < hourseBlog &&  dayNow > dayBlog ? ` Khoảng ${dayNow - dayBlog} ngày trước ` : ''
+    return({
+        timeNumber: `${hourseBlog} giờ - ${minuteBlog} phút`,
+        timeLetter: time
+    }) 
 }
 export default apiServer

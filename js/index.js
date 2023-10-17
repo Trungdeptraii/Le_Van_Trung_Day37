@@ -3,7 +3,7 @@ let user, blogs;
 const tag = (tag)=>document.querySelector(tag);
 const overlay = tag('.overlay');
 const blog = tag('.blog')
-const btn = tag('.btn');
+const btn = tag('.btn-header');
 const userEl = tag('.user');
 const userName = tag('.user-name');
 const userAvt = tag('.user-avt');
@@ -127,6 +127,10 @@ postForm.addEventListener('submit',async (e)=>{
     let token = client.fnToken();
     const title = tag('.posts-title').value;
     const content = tag('.posts-content').value;
+    const dateTime = tag('#datepicker').value;
+    console.log('dateTime', dateTime)
+    const z = new Date(dateTime);
+    console.log({title, content, date: z})
     let {res, data} = await client.Fetch('POST', 'blogs', {title, content}, token.accessToken)
     if(res.ok){
         blog.textContent = '';

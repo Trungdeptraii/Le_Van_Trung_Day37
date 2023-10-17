@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.vi.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -16,7 +24,7 @@
             <span class="create-post"><a href="#">Create</a></span>
             <span class="logout"><a href="#">Logout</a></span>
         </div>
-        <div class="btn">
+        <div class="btn-header">
             <div class="btn-login">Login</div>
             <div class="btn-register">Register</div>
         </div>
@@ -26,6 +34,7 @@
         <form action="" class="posts">
             <input type="text" placeholder="Nhập tiêu đề" class="posts-title">
             <textarea name="" id="" cols="30" rows="10" placeholder="Nhập nội dung" class="posts-content"></textarea>
+            <input type="text" id="datepicker" class="form-control">           
             <button class="create-blog">create</button>
         </form>
     </div>
@@ -42,10 +51,10 @@
                 <form action="#" class="form-login">
                     <div class="form-login-body">
                         <div class="field">
-                            <input type="email" class="login-email" required placeholder="Nhập email" value="">
+                            <input type="email" class="login-email" required placeholder="Nhập email" value="bootz@gmail.com">
                         </div>
                         <div class="field">
-                            <input type="text" class="login-password" required placeholder="Nhập password" value="">
+                            <input type="password" class="login-password" required placeholder="Nhập password" value="boot12345">
                         </div>
                         <div class="field">
                             <button class="btn-login-form" type="submit">Login</button>
@@ -63,7 +72,7 @@
                             <input type="email" required class="register-email" placeholder="Nhập email">
                         </div>
                         <div class="field">
-                            <input type="text" required class="register-password" placeholder="Nhập password">
+                            <input type="password" required class="register-password" placeholder="Nhập password">
                         </div>
                         <div class="field">
                             <button class="btn-register-form" type="submit">Register</button>
@@ -94,4 +103,15 @@
     </div>
 </body>
  <script type="module" src="./js/index.js"></script>
-</html>
+    <script>
+       $(document).ready(function () {
+                $('#datepicker').datepicker({
+                format: 'mm/dd/yyyy',
+                language: 'en', // Đặt ngôn ngữ cho DatePicker (vi cho tiếng Việt)
+                todayHighlight: true,
+                autoclose: true,
+            });
+        });
+    </script>
+    
+ </html>
